@@ -17,11 +17,11 @@ import MovieCard from "../components/MovieCard"
 
 //import './Movie.css'
 
-const moviesURL = import.meta.env.VITE_API
-const apiKey = import.meta.env.VITE_API_KEY
+const moviesURL = 'https://api.themoviedb.org/3/movie/'
+const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
 
-const imageUrl = import.meta.env.VITE_IMG;
-const imageUrlFull = import.meta.env.VITE_IMGFULL;
+const imageUrl = "https://image.tmdb.org/t/p/original/"
+const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
 
 
 const Movie = () => {

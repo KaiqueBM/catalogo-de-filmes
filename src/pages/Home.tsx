@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const moviesURL = import.meta.env.VITE_API;
-const apiKey = import.meta.env.VITE_API_KEY;
-const imageUrl = import.meta.env.VITE_IMG;
-const imageUrlFull = import.meta.env.VITE_IMGFULL;
+const moviesURL = 'https://api.themoviedb.org/3/movie/'
+const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
+const imageUrl = "https://image.tmdb.org/t/p/original/"
+const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState<any>([]);

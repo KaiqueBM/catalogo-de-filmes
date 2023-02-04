@@ -4,10 +4,10 @@ import MovieCard from "../components/MovieCard"
 
 //import './MoviesGrid.css'
 
-const searchURL = import.meta.env.VITE_SEARCH
-const apiKey = import.meta.env.VITE_API_KEY
-const imageUrl = import.meta.env.VITE_IMG;
-const imageUrlFull = import.meta.env.VITE_IMGFULL;
+const searchURL = 'https://api.themoviedb.org/3/movie/'
+const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
+const imageUrl = "https://image.tmdb.org/t/p/original/"
+const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
 
 const Search = () => {
   const [searchParams] = useSearchParams()
