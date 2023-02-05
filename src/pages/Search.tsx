@@ -4,7 +4,7 @@ import MovieCard from "../components/MovieCard"
 
 //import './MoviesGrid.css'
 
-const searchURL = 'https://api.themoviedb.org/3/movie/'
+const searchURL = 'https://api.themoviedb.org/3/search/movie/'
 const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
 const imageUrl = "https://image.tmdb.org/t/p/original/"
 const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
@@ -38,7 +38,7 @@ const Search = () => {
     <div className="">
 
 
-{movies.length > 0 && (
+{movies.length === 0 ? (<p>Carregando...</p>) : (
       <div className="relative flex flex-row justify-center h-530" id="teste">
         <img className="absolute w-screen object-cover ml-4 mr-4 opacity-10 h-530" src={!data ? (imageUrlFull + movies[0].backdrop_path) : (imageUrlFull + data.backdrop_path)} />
         <img className="ml-4 mr-4  rounded-2xl mt-5 mb-5 opacity-100 z-10 hover:scale-105 transition" src={!data ? (imageUrlFull + movies[0].poster_path) : (imageUrlFull + data.poster_path)} />

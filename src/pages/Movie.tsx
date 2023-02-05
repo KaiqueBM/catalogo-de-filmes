@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 
 import {
   BsGraphUp,
@@ -24,6 +24,8 @@ const imageUrl = "https://image.tmdb.org/t/p/original/"
 const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
 
 
+
+
 const Movie = () => {
   const {id} = useParams()
   const [movie, setMovie] = useState<any>(null)
@@ -43,9 +45,14 @@ const Movie = () => {
   }
 
   useEffect(()=>{
-    const movieUrl = `${moviesURL}${id}?${apiKey}`
+    const movieUrl = `${moviesURL}${id}?${apiKey}&language=pt-BR`
     getMovie(movieUrl)
   }, [])
+
+  interface genres{
+    id: number,
+    name: string
+  }[];
 
   return (
     <div className="bg-zinc-800 h-screen">{movie && (
@@ -60,8 +67,9 @@ const Movie = () => {
         <div className="flex flex-col w-10/12 ml-4 mr-4">
 
           <div className="text-white text-3xl text-end z-10 mb-3 flex flex-row justify-end">
-            {movie.vote_average <= 1 && (<BsStarHalf />)}
-            {movie.vote_average <= 2 && movie.vote_average > 1 && (<div className="flex flex-row"><BsStarFill /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
+            {movie.vote_average === 0 && (<div className="flex flex-row"><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
+            {movie.vote_average <= 1 && movie.vote_average > 0.2 && (<div className="flex flex-row"><BsStarHalf className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
+            {movie.vote_average <= 2 && movie.vote_average > 1 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
             {movie.vote_average <= 3 && movie.vote_average > 2 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStarHalf className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
             {movie.vote_average <= 4 && movie.vote_average > 3 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStar className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
             {movie.vote_average <= 5 && movie.vote_average > 4 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarHalf className="mr-2" /><BsStar className="mr-2" /><BsStar /></div>)}
@@ -71,6 +79,11 @@ const Movie = () => {
             {movie.vote_average <= 9 && movie.vote_average > 8 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarHalf /></div>)}
             {movie.vote_average <= 10 && movie.vote_average > 9 && (<div className="flex flex-row"><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarFill className="mr-2" /><BsStarFill /></div>)}
           </div>
+
+
+          <div className="flex flex-row flex-wrap z-10 justify-end">{movie.genres.map(({id, name}:genres)=>(
+            <div key={id} className="ml-3 bg-slate-200 pl-3 pr-3 rounded-full">{name}</div>
+          ))}</div>
           
           <div className="text-white text-6xl text-center z-10 mb-3">{movie.title}</div>
           <hr className="border-2 z-10 mb-3"></hr>
@@ -89,20 +102,28 @@ const Movie = () => {
 
 
 
-        <div className="">
+
           <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase"><BsGraphUp /> <span className="-mt-1 ml-2">Receita:</span></div>
           <div className="text-gray-200 text-justify mb-3">{formatCurrency(movie.revenue)}</div>
-        </div>
 
-        <div className="">
+
+
           <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase"><BsCalendar3 /> <span className="-mt-1 ml-2">Data de lançamento:</span></div>
           <div className="text-gray-200 text-justify mb-3">{movie.release_date}</div>
-        </div>
 
-        <div className="">
+
           <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase"><BsStar /> <span className="-mt-1 ml-2">Nota:</span></div>
           <div className="text-gray-200 text-justify mb-3">{movie.vote_average}</div>
-        </div>
+
+
+        <hr className="border-2 z-10 mb-3"></hr>
+
+            <Link to={`/`} className="w-full flex flex-row justify-center z-10">
+              <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition ">
+                    VOLTAR PARA A HOME
+                  </button>
+                  </Link>
+        
           
 
           

@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 
 const moviesURL = 'https://api.themoviedb.org/3/movie/'
 const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
+const apiGenre = 'https://api.themoviedb.org/3/genre/movie/'
 const imageUrl = "https://image.tmdb.org/t/p/original/"
 const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState<any>([]);
+  const [genreMovies, setGenreMovies] = useState<any>([]);
 
   const getTopRatedMovies = async (url: string) => {
     const res = await fetch(url);
@@ -16,6 +18,13 @@ const Home = () => {
     setTopMovies(data.results);
   };
 
+  //const getGenreMovies = async (url: string) => {
+   // const res = await fetch(url);
+  //  const data = await res.json();
+//
+//setGenreMovies(data.results);
+ // };
+
   const [data, setData] = useState<any>("");
   const childToParent = (movie: any) => {
     setData(movie);
@@ -23,10 +32,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const topRatedUrl = `${moviesURL}popular?${apiKey}`;
+    const topRatedUrl = `${moviesURL}popular?${apiKey}&language=pt-BR`;
+    //const topGenreUrl = `https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28`;
     getTopRatedMovies(topRatedUrl);
+    //getGenreMovies(topGenreUrl)
   }, []);
 
+  //console.log(genreMovies)
 
   
 
@@ -38,7 +50,7 @@ const Home = () => {
       {topMovies.length > 0 && (
         <div className="relative flex flex-row justify-center h-530" id="teste">
           <img
-            className="absolute w-screen object-cover ml-4 mr-4 opacity-10 h-530"
+            className="absolute w-screen object-cover ml-4 mr-4 opacity-10 h-530 transition"
             src={
               !data
                 ? imageUrlFull + topMovies[0].backdrop_path
@@ -53,7 +65,7 @@ const Home = () => {
                 : imageUrlFull + data.poster_path
             }
           />
-          <div className="w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center">
+          <div className="w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center transition">
             <div className="uppercase font-semibold text-4xl p-4 z-10">
               {!data ? topMovies[0].title : data.title}
             </div>
@@ -64,13 +76,13 @@ const Home = () => {
             <div className="z-10">
               {!data ? (
                 <Link to={`/movie/${topMovies[0].id}`}>
-                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3">
+                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
                     DETALHES
                   </button>
                 </Link>
               ) : (
                 <Link to={`/movie/${data.id}`}>
-                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3">
+                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
                     DETALHES
                   </button>
                 </Link>
