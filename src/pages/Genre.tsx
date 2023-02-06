@@ -1,29 +1,24 @@
-import { useState, useEffect, useLayoutEffect } from "react"
-import {Link, useParams} from "react-router-dom"
+import { useState, useEffect, useLayoutEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
-
-
-const moviesURL = 'https://api.themoviedb.org/3/movie/'
-const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
-const apiGenre = 'https://api.themoviedb.org/3/discover/movie?'
-const imageUrl = "https://image.tmdb.org/t/p/w1280/"
-const imageUrlFull = 'https://image.tmdb.org/t/p/w1280/'
-
-
-
+const moviesURL = "https://api.themoviedb.org/3/movie/";
+const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
+const apiGenre = "https://api.themoviedb.org/3/discover/movie?";
+const imageUrl = "https://image.tmdb.org/t/p/w1280/";
+const imageUrlFull = "https://image.tmdb.org/t/p/w1280/";
 
 const Genre = () => {
-  const {id} = useParams()
-  const {name} = useParams()
-  const [movies, setMovies] = useState<any>([])
+  const { id } = useParams();
+  const { name } = useParams();
+  const [movies, setMovies] = useState<any>([]);
 
-  const getMovies = async(url: string) => {
+  const getMovies = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
 
-    setMovies(data.results)
-    console.log(data.results)
-  }
+    setMovies(data.results);
+    console.log(data.results);
+  };
 
   const [data, setData] = useState<any>("");
   const childToParent = (movie: any) => {
@@ -31,38 +26,36 @@ const Genre = () => {
     console.log(data);
   };
 
+  const [pagination, setPagination] = useState<any>(1);
 
-  const [pagination, setPagination] = useState<any>(1)
-
-  function proximaPagina(e:any){
-    setPagination((prev:number)=>prev + 1)
-    console.log(pagination)
+  function proximaPagina(e: any) {
+    setPagination((prev: number) => prev + 1);
+    console.log(pagination);
   }
-  function voltarPagina(e:any){
-    setPagination((prev:number)=>prev - 1)
-    console.log(pagination)
+  function voltarPagina(e: any) {
+    setPagination((prev: number) => prev - 1);
+    console.log(pagination);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const updateUrl = `${apiGenre}${apiKey}&language=pt-BR&with_genres=${id}&page=${pagination}`;
     getMovies(updateUrl);
-  }, [pagination])
+  }, [pagination]);
 
-
-
-  useEffect(()=>{
-    const moviesUrl = `${apiGenre}${apiKey}&language=pt-BR&with_genres=${id}`
-    getMovies(moviesUrl)
-  }, [])
+  useEffect(() => {
+    const moviesUrl = `${apiGenre}${apiKey}&language=pt-BR&with_genres=${id}`;
+    getMovies(moviesUrl);
+  }, []);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-}, [pagination]);
-
+    window.scrollTo(0, 0);
+  }, [pagination]);
 
   return (
     <div className="">
-        {movies.length === 0 ? (<p>carregando...</p>) : (
+      {movies.length === 0 ? (
+        <p>carregando...</p>
+      ) : (
         <div className="relative flex md:flex-row flex-col justify-center md:h-530">
           <img
             className="absolute w-full object-cover ml-4 mr-4 opacity-10 md:h-530 h-full transition"
@@ -108,15 +101,13 @@ const Genre = () => {
         </div>
       )}
 
-
-<div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
+      <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
         <span className="border-b-4 border-t-4 border-slate-700">
-          Filmes da caregoria {name}
+          Filmes da categoria {name}
         </span>
       </div>
 
-
-<div
+      <div
         className="flex flex-row flex-wrap justify-center w-full"
         onMouseEnter={childToParent}
       >
@@ -147,20 +138,33 @@ const Genre = () => {
       </div>
 
       <div className="w-full text-white bg-white border-t-4 border-slate-800">
-        
         <div className="flex flex-row justify-center">
-        <Link to={`/genre/${name}/${id}`} className="flex">
-          {pagination <= 1 ? (<></>) : (
-          <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white" onClick={voltarPagina}>Voltar página</button>
-          )}
-          <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 bg-white text-slate-700 border-slate-700 m-2">{pagination}</button>
-          
-          <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white" onClick={proximaPagina}>Próxima página</button>
+          <Link to={`/genre/${name}/${id}`} className="flex">
+            {pagination <= 1 ? (
+              <></>
+            ) : (
+              <button
+                className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
+                onClick={voltarPagina}
+              >
+                Voltar página
+              </button>
+            )}
+            <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 bg-white text-slate-700 border-slate-700 m-2">
+              {pagination}
+            </button>
+
+            <button
+              className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
+              onClick={proximaPagina}
+            >
+              Próxima página
+            </button>
           </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Genre
+export default Genre;
