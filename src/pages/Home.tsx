@@ -1,81 +1,111 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 
-const moviesURL = 'https://api.themoviedb.org/3/movie/'
-const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
-const apiGenre = 'https://api.themoviedb.org/3/genre/movie/'
-const imageUrl = "https://image.tmdb.org/t/p/original/"
-const imageUrlFull = 'https://image.tmdb.org/t/p/original/'
+const moviesURL = "https://api.themoviedb.org/3/movie/";
+const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
+const imageUrl = "https://image.tmdb.org/t/p/w1280/";
+const imageUrlFull = "https://image.tmdb.org/t/p/w1280/";
+
+interface Genres {
+  id: number;
+  name: string;
+}
+[];
+
+interface Movies {
+  poster_path: string;
+  overview: string;
+  release_date: string;
+  genre_ids: [number];
+  id: number;
+  title: string;
+  backdrop_path: string;
+  vote_average: number;
+}
 
 const Home = () => {
-  const [topMovies, setTopMovies] = useState<any>([]);
-  const [genreMovies, setGenreMovies] = useState<any>([]);
+  const [movies, setMovies] = useState<any>([]);
+  const [genreList, setGenreList] = useState<any>([]);
 
-  const getTopRatedMovies = async (url: string) => {
+  const getMoviesList = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
-
-    setTopMovies(data.results);
+    setMovies(data.results);
   };
 
-  //const getGenreMovies = async (url: string) => {
-   // const res = await fetch(url);
-  //  const data = await res.json();
-//
-//setGenreMovies(data.results);
- // };
+  const getGenreList = async (url: string) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    setGenreList(data.genres);
+  };
 
-  const [data, setData] = useState<any>("");
+  const [data, setData] = useState<Movies | null>();
   const childToParent = (movie: any) => {
     setData(movie);
-    console.log(data);
   };
 
+  const [pagination, setPagination] = useState<number>(1);
+  function proximaPagina() {
+    setPagination((prev: number) => prev + 1);
+  }
+  function voltarPagina() {
+    setPagination((prev: number) => prev - 1);
+  }
+  function primeiraPagina(number: number) {
+    setPagination(number);
+  }
+
   useEffect(() => {
-    const topRatedUrl = `${moviesURL}popular?${apiKey}&language=pt-BR`;
-    //const topGenreUrl = `https://api.themoviedb.org/3/discover/movie?${apiKey}&with_genres=28`;
-    getTopRatedMovies(topRatedUrl);
-    //getGenreMovies(topGenreUrl)
+    const updateUrl = `${moviesURL}popular?${apiKey}&language=pt-BR&page=${pagination}`;
+    getMoviesList(updateUrl);
+  }, [pagination]);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pagination]);
+
+  useEffect(() => {
+    const apiMoviesURL = `${moviesURL}popular?${apiKey}&language=pt-BR&page=1`;
+    getMoviesList(apiMoviesURL);
+    const genreURL =
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
+    getGenreList(genreURL);
   }, []);
-
-  //console.log(genreMovies)
-
-  
-
-  //console.log(topMovies)
-  console.log(data);
 
   return (
     <div className="">
-      {topMovies.length > 0 && (
-        <div className="relative flex flex-row justify-center h-530" id="teste">
+      {movies.length > 0 && (
+        <div
+          className="relative flex md:flex-row flex-col justify-center md:h-530"
+          id="teste"
+        >
           <img
-            className="absolute w-screen object-cover ml-4 mr-4 opacity-10 h-530 transition"
+            className="absolute w-full object-cover ml-4 mr-4 opacity-10 md:h-530 h-full transition"
             src={
               !data
-                ? imageUrlFull + topMovies[0].backdrop_path
+                ? imageUrlFull + movies[0].backdrop_path
                 : imageUrlFull + data.backdrop_path
             }
           />
           <img
-            className="ml-4 mr-4  rounded-2xl mt-5 mb-5 opacity-100 z-10 hover:scale-105 transition"
+            className="ml-4 mr-4 rounded-2xl mt-5 mb-5 opacity-100 z-10 hover:scale-105 transition md:w-min w-6/12"
             src={
               !data
-                ? imageUrlFull + topMovies[0].poster_path
+                ? imageUrlFull + movies[0].poster_path
                 : imageUrlFull + data.poster_path
             }
           />
-          <div className="w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center transition">
+          <div className="md:w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center transition">
             <div className="uppercase font-semibold text-4xl p-4 z-10">
-              {!data ? topMovies[0].title : data.title}
+              {!data ? movies[0].title : data.title}
             </div>
             <hr className="ml-4 mr-4 z-10"></hr>
             <div className="p-4">
-              {!data ? topMovies[0].overview : data.overview}
+              {!data ? movies[0].overview : data.overview}
             </div>
             <div className="z-10">
               {!data ? (
-                <Link to={`/movie/${topMovies[0].id}`}>
+                <Link to={`/movie/${movies[0].id}`}>
                   <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
                     DETALHES
                   </button>
@@ -89,23 +119,43 @@ const Home = () => {
               )}
             </div>
           </div>
-          <div className="absolute w-screen h-96 bottom-0 left-0 text-white bg-gradient-to-t from-zinc-800"></div>
+          <div className="absolute w-full h-96 bottom-0 left-0 text-white bg-gradient-to-t from-zinc-800"></div>
         </div>
       )}
+
+      <div className=" bg-zinc-200">
+        <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-zinc-800">
+          <span className="border-b-4 border-t-4 border-slate-700">
+            CATEGORIAS
+          </span>
+        </div>
+        <div className="flex flex-row flex-wrap justify-center mt-5 pb-5">
+          {genreList.map(({ id, name }: Genres) => (
+            <div key={id} className="text-2xl text-black ml-1 mr-1">
+              <Link to={`/genre/${name}/${id}`}>
+                <button className="bg-slate-200 pl-4 pr-4 rounded-full border-2 border-slate-400 mt-1 mb-1 transition hover:bg-white hover:border-slate-200">
+                  {name}
+                </button>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
         <span className="border-b-4 border-t-4 border-slate-700">
           Filmes mais populares do momento
         </span>
       </div>
+
       <div
-        className="flex flex-row flex-wrap justify-center w-screen"
+        className="flex flex-row flex-wrap justify-center w-full"
         onMouseEnter={childToParent}
       >
-        {topMovies.length === 0 ? (
+        {movies.length === 0 ? (
           <p>Carregando...</p>
         ) : (
-          topMovies.map((movie: any) => (
+          movies.map((movie: Movies) => (
             <div
               key={movie.id}
               className="ml-5 mr-5 hover:transform hover:scale-105 transition whitespace-nowrap md:w-2/12 w-6/12"
@@ -115,7 +165,7 @@ const Home = () => {
             >
               <a href="#topo">
                 <img
-                  className="rounded-2xl"
+                  className="rounded-2xl "
                   src={imageUrl + movie.poster_path}
                   alt={movie.title}
                 />
@@ -126,6 +176,33 @@ const Home = () => {
             </div>
           ))
         )}
+      </div>
+
+      <div className="w-full text-white bg-white border-t-4 border-slate-800">
+        <div className="flex flex-row justify-center">
+          <Link to="/" className="flex">
+            {pagination <= 1 ? (
+              <></>
+            ) : (
+              <button
+                className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
+                onClick={voltarPagina}
+              >
+                Voltar página
+              </button>
+            )}
+            <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 bg-white text-slate-700 border-slate-700 m-2">
+              {pagination}
+            </button>
+
+            <button
+              className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
+              onClick={proximaPagina}
+            >
+              Próxima página
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

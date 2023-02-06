@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react"
 import { Link, useSearchParams } from "react-router-dom"
-import MovieCard from "../components/MovieCard"
-
-//import './MoviesGrid.css'
 
 const searchURL = 'https://api.themoviedb.org/3/search/movie/'
 const apiKey = 'api_key=699f83f2ccaef388106eac2b4c22ea0f'
@@ -40,7 +37,7 @@ const Search = () => {
 
 {movies.length === 0 ? (<p>Carregando...</p>) : (
       <div className="relative flex flex-row justify-center h-530" id="teste">
-        <img className="absolute w-screen object-cover ml-4 mr-4 opacity-10 h-530" src={!data ? (imageUrlFull + movies[0].backdrop_path) : (imageUrlFull + data.backdrop_path)} />
+        <img className="absolute w-full object-cover ml-4 mr-4 opacity-10 h-530" src={!data ? (imageUrlFull + movies[0].backdrop_path) : (imageUrlFull + data.backdrop_path)} />
         <img className="ml-4 mr-4  rounded-2xl mt-5 mb-5 opacity-100 z-10 hover:scale-105 transition" src={!data ? (imageUrlFull + movies[0].poster_path) : (imageUrlFull + data.poster_path)} />
         <div className="w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center">
           <div className="uppercase font-semibold text-4xl p-4 z-10">{!data ? (movies[0].title) : (data.title)}</div>
@@ -58,7 +55,7 @@ const Search = () => {
               )}
           </div>
         </div>
-        <div className="absolute w-screen h-96 bottom-0 left-0 text-white bg-gradient-to-t from-zinc-800"></div>
+        <div className="absolute w-full h-96 bottom-0 left-0 text-white bg-gradient-to-t from-zinc-800"></div>
       </div>
     )}
 
@@ -67,7 +64,7 @@ const Search = () => {
       <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
         <span className="border-b-4 border-t-4 border-slate-700">Resultados: {query}</span>
       </div>
-      <div className="flex flex-row flex-wrap justify-center w-screen" onMouseEnter={childToParent}>
+      <div className="flex flex-row flex-wrap justify-center w-full" onMouseEnter={childToParent}>
         {movies.length === 0 ? (<p>Carregando...</p>) : (
           movies.map((movie:any)=> (
             
