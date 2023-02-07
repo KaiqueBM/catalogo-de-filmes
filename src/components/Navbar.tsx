@@ -38,7 +38,7 @@ const Navbar = () => {
       className="flex flex-row justify-between items-center bg-slate-700 h-14 border-b-4 border-slate-200"
       id="topo"
     >
-      <div className="text-slate-200 font-bold text-3xl ml-5 hover:text-white transition">
+      <div className="text-slate-200 font-bold md:text-3xl text-2xl md:ml-5 ml-1 hover:text-white transition">
         <Link to="/" className="flex" onClick={paginaInicial}>
           <span className="ml-1 -mt-1">
             {language.theme === "pt-BR" ? (<span>CATÁLOGO DE FILMES</span>) : (<span>CATALOG OF MOVIES</span>)}
@@ -57,9 +57,9 @@ const Navbar = () => {
         </Popover>
       </Fragment>
 
-      <form onSubmit={handleSubmit} className="mr-5">
+      <form onSubmit={handleSubmit} className="md:mr-5 mr-1">
         <input
-          className="border-2 border-slate-400 rounded-full bg-slate-200 placeholder:text-black placeholder:text-center p-1.5 pb-0.5 w-60 pl-5 pr-5 hover:bg-white hover:border-slate-200 transition"
+          className="border-2 border-slate-400 rounded-full bg-slate-200 placeholder:text-black placeholder:text-center p-1.5 pb-0.5 md:w-60 w-40 pl-5 pr-5 hover:bg-white hover:border-slate-200 transition"
           type="text"
           placeholder={language.theme === "pt-BR" ? ("Busque um filme :)") : ("Search for a movie :)")}
           onChange={(e) => setSearch(e.target.value)}

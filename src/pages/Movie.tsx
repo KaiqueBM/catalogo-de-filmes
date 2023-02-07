@@ -56,17 +56,17 @@ const Movie = () => {
   [];
 
   return (
-    <div className="bg-zinc-800 h-screen">
+    <div className="bg-zinc-800 lg:h-screen h-full">
       {movie && (
         <>
           <img
-            className="absolute w-screen object-cover opacity-10 h-screen"
+            className="absolute w-screen object-cover opacity-10 lg:h-screen h-full"
             src={imageUrlFull + movie.backdrop_path}
           />
 
-          <div className="flex flex-row justify-center container mx-auto items-center h-screen">
+          <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center container mx-auto items-center lg:h-screen h-full">
             <img
-              className="ml-4 mr-4  rounded-2xl mt-5 mb-5 hover:scale-105 transition w-4/12 z-10"
+              className="ml-4 mr-4  rounded-2xl mt-5 mb-5 hover:scale-105 transition lg:w-4/12 w-6/12 z-10"
               src={imageUrlFull + movie.poster_path}
             />
             <div className="flex flex-col w-10/12 ml-4 mr-4">
@@ -183,7 +183,7 @@ const Movie = () => {
                 ))}
               </div>
 
-              <div className="text-white text-6xl text-center z-10 mb-3">
+              <div className="text-white lg:text-6xl text-4xl text-center z-10 mb-3">
                 {movie.title}
               </div>
               <hr className="border-2 z-10 mb-3"></hr>
@@ -238,7 +238,7 @@ const Movie = () => {
                 to={`/`}
                 className="w-full flex flex-row justify-center z-10"
               >
-                <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition ">
+                <button className="border-2 border-white rounded-full lg:w-2/6 w-3/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition md:mb-0 mb-5">
                   {language.theme === "pt-BR" ? (<span>VOLTAR PARA A HOME</span>) : (<span>BACK TO HOME</span>)}
                 </button>
               </Link>

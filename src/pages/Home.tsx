@@ -91,9 +91,7 @@ const Home = () => {
       
       {movies.length > 0 && (
         <div
-          className="relative flex md:flex-row flex-col justify-center md:h-530"
-          id="teste"
-        >
+          className="relative flex md:flex-row flex-col justify-center md:h-530">
           <img
             className="absolute w-full object-cover ml-4 mr-4 opacity-10 md:h-530 h-full transition"
             src={
@@ -103,7 +101,7 @@ const Home = () => {
             }
           />
           <img
-            className="ml-4 mr-4 rounded-2xl mt-5 mb-5 opacity-100 z-10 hover:scale-105 transition md:w-min w-6/12"
+            className="md:ml-4 md:mr-4 rounded-2xl mt-5 md:mb-5 opacity-100 z-10 hover:scale-105 transition md:w-min w-6/12 mx-auto"
             src={
               !data
                 ? imageUrlFull + movies[0].poster_path
@@ -121,13 +119,13 @@ const Home = () => {
             <div className="z-10">
               {!data ? (
                 <Link to={`/movie/${movies[0].id}`}>
-                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
+                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition md:mb-0 mb-5">
                     {language.theme === "pt-BR" ? (<span>DETALHES</span>) : (<span>DETAILS</span>)}
                   </button>
                 </Link>
               ) : (
                 <Link to={`/movie/${data.id}`}>
-                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
+                  <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition md:mb-0 mb-5">
                     {language.theme === "pt-BR" ? (<span>DETALHES</span>) : (<span>DETAILS</span>)}
                   </button>
                 </Link>
@@ -140,16 +138,16 @@ const Home = () => {
 
       <div className=" bg-zinc-200">
         <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-zinc-800">
-          <span className="border-b-4 border-t-4 border-slate-700">
+          <span className="md:border-b-4 md:border-t-4 border-slate-700">
             
             {language.theme === "pt-BR" ? (<span>GENEROS</span>) : (<span>GENRES</span>)}
           </span>
         </div>
         <div className="flex flex-row flex-wrap justify-center mt-5 pb-5">
           {genreList.map(({ id, name }: Genres) => (
-            <div key={id} className="text-2xl text-black ml-1 mr-1">
+            <div key={id} className="md:text-2xl text-xl text-black ml-1 mr-1">
               <Link to={`/genre/${name}/${id}`}>
-                <button className="bg-slate-200 pl-4 pr-4 rounded-full border-2 border-slate-400 mt-1 mb-1 transition hover:bg-white hover:border-slate-200">
+                <button className="bg-slate-200 pl-4 pr-4 rounded-xl border-2 border-slate-300 mt-1 mb-1 transition hover:bg-white hover:border-slate-200">
                   {name}
                 </button>
               </Link>
@@ -159,7 +157,7 @@ const Home = () => {
       </div>
 
       <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
-        <span className="border-b-4 border-t-4 border-slate-700">
+        <span className="md:border-b-4 md:border-t-4 border-slate-700">
           
           {language.theme === "pt-BR" ? (<span>Filmes mais populares do momento</span>) : (<span>Most popular movies of the moment</span>)}
         </span>
