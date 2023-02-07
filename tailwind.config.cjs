@@ -8,6 +8,9 @@ module.exports = {
         extend: {
             height: {
                 '530': '530px',
+            },
+            padding: {
+                '2.5': '0.60rem'
             }
         },
     },

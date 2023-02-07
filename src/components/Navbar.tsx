@@ -49,7 +49,7 @@ const Navbar = () => {
       <Fragment>
       <Popover placement="bottom">
           <PopoverHandler>
-            <Button variant="gradient" className="transition">{language.theme === "pt-BR" ? (<BsToggleOff className="text-4xl hover:transition-all" onClick={language.toggleTheme} />) : (<BsToggleOn className="text-4xl hover:transition-all" onClick={language.toggleTheme} />)}</Button>
+            <Button variant="gradient" className="transition hover:bg-slate-600 p-1 rounded-lg">{language.theme === "pt-BR" ? (<BsToggleOff className="text-4xl hover:transition-all" onClick={language.toggleTheme} />) : (<BsToggleOn className="text-4xl hover:transition-all" onClick={language.toggleTheme} />)}</Button>
           </PopoverHandler>
           <PopoverContent className="rounded-full z-50">
             <span>Linguagem atual: {language.theme}. Clique no botão novamente para mudar</span>
@@ -59,15 +59,15 @@ const Navbar = () => {
 
       <form onSubmit={handleSubmit} className="md:mr-5 mr-1">
         <input
-          className="border-2 border-slate-400 rounded-full bg-slate-200 placeholder:text-black placeholder:text-center p-1.5 pb-0.5 md:w-60 w-40 pl-5 pr-5 hover:bg-white hover:border-slate-200 transition"
+          className="border-2 border-slate-400 rounded-bl-xl rounded-tl-xl bg-slate-100 placeholder:text-black placeholder:text-left p-1.5 pb-0.5 text-lg md:w-60 w-40 md:pl-5 md:pr-5 hover:bg-white hover:border-slate-200 transition"
           type="text"
-          placeholder={language.theme === "pt-BR" ? ("Busque um filme :)") : ("Search for a movie :)")}
+          placeholder={language.theme === "pt-BR" ? ("Busque um filme") : ("Search for a movie")}
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
         
         <button
-          className="border-2 border-slate-400 bg-slate-200 rounded-full p-2 ml-2 hover:bg-white hover:border-slate-200 transition"
+          className="border-2 border-slate-400 bg-slate-600 rounded-br-xl rounded-tr-xl p-2.5 hover:bg-white hover:border-slate-200 transition text-white text-lg hover:text-black"
           type="submit"
         >
           <BiSearchAlt2 />
