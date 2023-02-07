@@ -1,5 +1,7 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/LanguageContext";
+
 
 const moviesURL = "https://api.themoviedb.org/3/movie/";
 const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
@@ -26,6 +28,8 @@ interface Movies {
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
   const [genreList, setGenreList] = useState<any>([]);
+
+  const language = useContext(ThemeContext)
 
   const getMoviesList = async (url: string) => {
     const res = await fetch(url);
@@ -56,7 +60,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    const updateUrl = `${moviesURL}popular?${apiKey}&language=pt-BR&page=${pagination}`;
+    const updateUrl = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
     getMoviesList(updateUrl);
   }, [pagination]);
 
@@ -65,15 +69,26 @@ const Home = () => {
   }, [pagination]);
 
   useEffect(() => {
-    const apiMoviesURL = `${moviesURL}popular?${apiKey}&language=pt-BR&page=1`;
+    const apiMoviesURL = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=1`;
     getMoviesList(apiMoviesURL);
     const genreURL =
       "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
     getGenreList(genreURL);
   }, []);
 
+  useEffect(()=>{
+    const updateUrlTheme = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
+    getMoviesList(updateUrlTheme);
+    const updateGenreURL =
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=${language.theme}`;
+    getGenreList(updateGenreURL);
+  }, [language.theme]);
+
+
+
   return (
     <div className="">
+      
       {movies.length > 0 && (
         <div
           className="relative flex md:flex-row flex-col justify-center md:h-530"
@@ -107,13 +122,13 @@ const Home = () => {
               {!data ? (
                 <Link to={`/movie/${movies[0].id}`}>
                   <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
-                    DETALHES
+                    {language.theme === "pt-BR" ? (<span>DETALHES</span>) : (<span>DETAILS</span>)}
                   </button>
                 </Link>
               ) : (
                 <Link to={`/movie/${data.id}`}>
                   <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 hover:bg-white hover:text-black transition">
-                    DETALHES
+                    {language.theme === "pt-BR" ? (<span>DETALHES</span>) : (<span>DETAILS</span>)}
                   </button>
                 </Link>
               )}
@@ -126,7 +141,8 @@ const Home = () => {
       <div className=" bg-zinc-200">
         <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-zinc-800">
           <span className="border-b-4 border-t-4 border-slate-700">
-            CATEGORIAS
+            
+            {language.theme === "pt-BR" ? (<span>GENEROS</span>) : (<span>GENRES</span>)}
           </span>
         </div>
         <div className="flex flex-row flex-wrap justify-center mt-5 pb-5">
@@ -144,7 +160,8 @@ const Home = () => {
 
       <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
         <span className="border-b-4 border-t-4 border-slate-700">
-          Filmes mais populares do momento
+          
+          {language.theme === "pt-BR" ? (<span>Filmes mais populares do momento</span>) : (<span>Most popular movies of the moment</span>)}
         </span>
       </div>
 
@@ -188,7 +205,7 @@ const Home = () => {
                 className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
                 onClick={voltarPagina}
               >
-                Voltar página
+                {language.theme === "pt-BR" ? (<span>Voltar página</span>) : (<span>Previous page</span>)}
               </button>
             )}
             <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 bg-white text-slate-700 border-slate-700 m-2">
@@ -199,7 +216,7 @@ const Home = () => {
               className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
               onClick={proximaPagina}
             >
-              Próxima página
+              {language.theme === "pt-BR" ? (<span>Próxima página</span>) : (<span>Next page</span>)}
             </button>
           </Link>
         </div>

@@ -1,11 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../context/LanguageContext";
+
+
+import { Fragment } from "react";
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+} from "@material-tailwind/react";
+
+import {BsToggleOff, BsToggleOn} from 'react-icons/bs'
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+
+  const language = useContext(ThemeContext)
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -26,17 +40,32 @@ const Navbar = () => {
     >
       <div className="text-slate-200 font-bold text-3xl ml-5 hover:text-white transition">
         <Link to="/" className="flex" onClick={paginaInicial}>
-          <span className="ml-1 -mt-1">CATÁLOGO DE FILMES</span>
+          <span className="ml-1 -mt-1">
+            {language.theme === "pt-BR" ? (<span>CATÁLOGO DE FILMES</span>) : (<span>CATALOG OF MOVIES</span>)}
+          </span>
         </Link>
       </div>
+
+      <Fragment>
+      <Popover placement="bottom">
+          <PopoverHandler>
+            <Button variant="gradient" className="transition">{language.theme === "pt-BR" ? (<BsToggleOff className="text-4xl hover:transition-all" onClick={language.toggleTheme} />) : (<BsToggleOn className="text-4xl hover:transition-all" onClick={language.toggleTheme} />)}</Button>
+          </PopoverHandler>
+          <PopoverContent className="rounded-full z-50">
+            <span>Linguagem atual: {language.theme}. Clique no botão novamente para mudar</span>
+          </PopoverContent>
+        </Popover>
+      </Fragment>
+
       <form onSubmit={handleSubmit} className="mr-5">
         <input
           className="border-2 border-slate-400 rounded-full bg-slate-200 placeholder:text-black placeholder:text-center p-1.5 pb-0.5 w-60 pl-5 pr-5 hover:bg-white hover:border-slate-200 transition"
           type="text"
-          placeholder="Busque um filme :)"
+          placeholder={language.theme === "pt-BR" ? ("Busque um filme :)") : ("Search for a movie :)")}
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
+        
         <button
           className="border-2 border-slate-400 bg-slate-200 rounded-full p-2 ml-2 hover:bg-white hover:border-slate-200 transition"
           type="submit"

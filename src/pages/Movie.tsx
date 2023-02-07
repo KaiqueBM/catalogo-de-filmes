@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import {
@@ -14,6 +14,7 @@ import {
 } from "react-icons/bs";
 
 import MovieCard from "../components/MovieCard";
+import { ThemeContext } from "../context/LanguageContext";
 
 //import './Movie.css'
 
@@ -26,6 +27,8 @@ const imageUrlFull = "https://image.tmdb.org/t/p/original/";
 const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState<any>(null);
+
+  const language = useContext(ThemeContext)
 
   const getMovie = async (url: string) => {
     const res = await fetch(url);
@@ -185,7 +188,7 @@ const Movie = () => {
               </div>
               <hr className="border-2 z-10 mb-3"></hr>
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
-                <BsCameraReels /> <span className="-mt-1 ml-2">Descrição:</span>
+                <BsCameraReels /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Descrição:</span>) : (<span>Description:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {movie.overview}
@@ -194,21 +197,21 @@ const Movie = () => {
               <hr className="border-2 z-10 mb-3"></hr>
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
                 <BsHourglassSplit />{" "}
-                <span className="-mt-1 ml-2">Duração:</span>
+                <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Duração:</span>) : (<span>Duration:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {movie.runtime} minutos.
               </div>
 
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
-                <BsWallet2 /> <span className="-mt-1 ml-2">Orçamento:</span>
+                <BsWallet2 /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Orçamento:</span>) : (<span>Budget:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {formatCurrency(movie.budget)}
               </div>
 
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
-                <BsGraphUp /> <span className="-mt-1 ml-2">Receita:</span>
+                <BsGraphUp /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Receita:</span>) : (<span>Revenue:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {formatCurrency(movie.revenue)}
@@ -216,14 +219,14 @@ const Movie = () => {
 
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
                 <BsCalendar3 />{" "}
-                <span className="-mt-1 ml-2">Data de lançamento:</span>
+                <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Data de lançamento:</span>) : (<span>Release date of:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {movie.release_date}
               </div>
 
               <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
-                <BsStar /> <span className="-mt-1 ml-2">Nota:</span>
+                <BsStar /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Nota:</span>) : (<span>Rate:</span>)}</span>
               </div>
               <div className="text-gray-200 text-justify mb-3">
                 {movie.vote_average}
@@ -236,7 +239,7 @@ const Movie = () => {
                 className="w-full flex flex-row justify-center z-10"
               >
                 <button className="border-2 border-white rounded-full w-2/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition ">
-                  VOLTAR PARA A HOME
+                  {language.theme === "pt-BR" ? (<span>VOLTAR PARA A HOME</span>) : (<span>BACK TO HOME</span>)}
                 </button>
               </Link>
             </div>
