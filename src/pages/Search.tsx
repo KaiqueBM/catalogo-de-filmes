@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ThemeContext } from "../context/LanguageContext";
 
-const searchURL = "https://api.themoviedb.org/3/search/movie/";
+const searchURL = "https://api.themoviedb.org/3/search/movie";
 const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
 const imageUrl = "https://image.tmdb.org/t/p/original/";
 const imageUrlFull = "https://image.tmdb.org/t/p/original/";
@@ -17,6 +17,7 @@ const Search = () => {
   const getSearchMovies = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
+    console.log(data)
 
     setMovies(data.results);
   };
@@ -36,6 +37,8 @@ const Search = () => {
     const updateUrlTheme = `${searchURL}?${apiKey}&language=${language.theme}&query=${query}`;
     getSearchMovies(updateUrlTheme);
   }, [language.theme]);
+
+  console.log(movies)
 
   return (
     <div className="">
