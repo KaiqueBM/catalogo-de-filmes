@@ -40,7 +40,7 @@ const Navbar = () => {
     >
       <div className="text-slate-200 font-bold md:text-3xl text-2xl md:ml-5 ml-1 hover:text-white transition">
         <Link to="/" className="flex" onClick={paginaInicial}>
-          <span className="ml-1 -mt-1">
+          <span className="ml-1 -mt-1 md:text-base text-sm">
             {language.theme === "pt-BR" ? (<span>CATÁLOGO DE FILMES</span>) : (<span>CATALOG OF MOVIES</span>)}
           </span>
         </Link>
