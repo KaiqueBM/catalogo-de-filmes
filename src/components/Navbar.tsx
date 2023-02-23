@@ -38,9 +38,9 @@ const Navbar = () => {
       className="flex flex-row justify-between items-center bg-slate-700 h-14 border-b-4 border-slate-200"
       id="topo"
     >
-      <div className="text-slate-200 font-bold md:text-3xl text-2xl md:ml-5 ml-1 hover:text-white transition">
+      <div className="text-slate-200 font-bold md:text-3xl text-lg md:ml-5 ml-1 hover:text-white transition">
         <Link to="/" className="flex" onClick={paginaInicial}>
-          <span className="ml-1 -mt-1 md:text-base text-sm">
+          <span className="ml-1 -mt-1">
             {language.theme === "pt-BR" ? (<span>CATÁLOGO DE FILMES</span>) : (<span>CATALOG OF MOVIES</span>)}
           </span>
         </Link>
@@ -49,7 +49,7 @@ const Navbar = () => {
       <Fragment>
       <Popover placement="bottom">
           <PopoverHandler>
-            <Button variant="gradient" className="transition hover:bg-slate-600 p-1 rounded-lg">{language.theme === "pt-BR" ? (<BsToggleOff className="text-4xl hover:transition-all" onClick={language.toggleTheme} />) : (<BsToggleOn className="text-4xl hover:transition-all" onClick={language.toggleTheme} />)}</Button>
+            <Button variant="gradient" className="transition hover:bg-slate-600 p-1 rounded-lg">{language.theme === "pt-BR" ? (<BsToggleOff className="md:text-4xl text-2xl hover:transition-all" onClick={language.toggleTheme} />) : (<BsToggleOn className="text-4xl hover:transition-all" onClick={language.toggleTheme} />)}</Button>
           </PopoverHandler>
           <PopoverContent className="rounded-full z-50">
             <span>Linguagem atual: {language.theme}. Clique no botão novamente para mudar</span>
@@ -57,17 +57,17 @@ const Navbar = () => {
         </Popover>
       </Fragment>
 
-      <form onSubmit={handleSubmit} className="md:mr-5 mr-1">
+      <form onSubmit={handleSubmit} className="md:mr-5 ml-1 -mr-2">
         <input
-          className="border-2 border-slate-400 rounded-bl-xl rounded-tl-xl bg-slate-100 placeholder:text-black placeholder:text-left p-1.5 pb-0.5 text-lg md:w-60 w-40 md:pl-5 md:pr-5 hover:bg-white hover:border-slate-200 transition"
+          className="border-2 border-slate-400 rounded-bl-xl rounded-tl-xl bg-slate-100 placeholder:text-black placeholder:text-left md:p-1.5 p-1 md:pb-0.5 pb-0 text-lg md:w-60 w-9/12 md:pl-5 md:pr-5 hover:bg-white hover:border-slate-200 transition"
           type="text"
-          placeholder={language.theme === "pt-BR" ? ("Busque um filme") : ("Search for a movie")}
+          placeholder={language.theme === "pt-BR" ? ("Pesquisar") : ("Search")}
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
         
         <button
-          className="border-2 border-slate-400 bg-slate-600 rounded-br-xl rounded-tr-xl p-2.5 hover:bg-white hover:border-slate-200 transition text-white text-lg hover:text-black"
+          className="border-2 border-slate-400 bg-slate-600 rounded-br-xl rounded-tr-xl md:p-2.5 p-1.5 hover:bg-white hover:border-slate-200 transition text-white text-lg hover:text-black"
           type="submit"
         >
           <BiSearchAlt2 />

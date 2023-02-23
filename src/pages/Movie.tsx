@@ -176,7 +176,7 @@ const Movie = () => {
                 {movie.genres.map(({ id, name }: genres) => (
                   <div
                     key={id}
-                    className="ml-3 bg-slate-200 pl-3 pr-3 rounded-full"
+                    className="ml-3 bg-slate-200 pl-3 pr-3 rounded-full mb-2"
                   >
                     {name}
                   </div>
