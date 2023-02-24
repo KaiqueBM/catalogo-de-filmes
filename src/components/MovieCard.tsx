@@ -30,10 +30,11 @@ const MovieCard = ({movies}: any) => {
 
   return (
     <>
+    
 <div
           className="relative flex md:flex-row flex-col justify-center md:h-530">
           <img
-            className="absolute w-full object-cover ml-4 mr-4 opacity-10 md:h-530 h-full transition"
+            className="absolute w-full object-cover opacity-10 md:h-530 h-full transition"
             src={
               !data
                 ? imageUrlFull + movies[0].backdrop_path
