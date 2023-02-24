@@ -23,14 +23,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider>
-      <Routes>
-        <Route element={<App />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/movie/:id" element={<Movie />} />
-          <Route path="/genre/:name/:id" element={<Genre />} />
-          <Route path="search" element={<Search />} />
-        </Route>
-      </Routes>
+        <Routes>
+          <Route element={<App />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:id" element={<Movie />} />
+            <Route path="/genre/:name/:id" element={<Genre />} />
+            <Route path="search" element={<Search />} />
+          </Route>
+        </Routes>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

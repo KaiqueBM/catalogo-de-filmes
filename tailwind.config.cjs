@@ -8,9 +8,11 @@ module.exports = {
         extend: {
             height: {
                 '530': '530px',
+                '9': '2.15rem'
             },
             padding: {
-                '2.5': '0.60rem'
+                '2.5': '0.60rem',
+                '0.25': '0.080rem'
             }
         },
     },

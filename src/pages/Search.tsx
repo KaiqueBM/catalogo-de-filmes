@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import MovieCard from "../components/MovieCard";
 import { ThemeContext } from "../context/LanguageContext";
 
 const searchURL = "https://api.themoviedb.org/3/search/movie";
@@ -96,35 +97,9 @@ const Search = () => {
           {language.theme === "pt-BR" ? (<span>Resultados da busca por: {query}</span>) : (<span>Search results for: {query}</span>)}
         </span>
       </div>
-      <div
-        className="flex flex-row flex-wrap justify-center w-full"
-        onMouseEnter={childToParent}
-      >
-        {movies.length === 0 ? (
+      {movies.length === 0 ? (
           <p>Carregando...</p>
-        ) : (
-          movies.map((movie: any) => (
-            <div
-              key={movie.id}
-              className="ml-5 mr-5 hover:transform hover:scale-105 transition whitespace-nowrap md:w-2/12 w-6/12"
-              onMouseEnter={() => {
-                childToParent(movie);
-              }}
-            >
-              <a href="#topo">
-                <img
-                  className="rounded-2xl"
-                  src={imageUrl + movie.poster_path}
-                  alt={movie.title}
-                />
-                <p className="text-center text-white font-semibold pt-2 pb-5 text-xl whitespace-pre-line">
-                  {movie.title}
-                </p>
-              </a>
-            </div>
-          ))
-        )}
-      </div>
+        ) : (<MovieCard movies={movies} />)}
     </div>
   );
 };
