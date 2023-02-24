@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BiSearchAlt2, BiUpArrowCircle } from "react-icons/bi";
 
-import {BsFillHouseFill, BsSearch, BsCardList} from "react-icons/bs";
+import {BsFillHouseFill, BsSearch, BsCardList, BsBoxArrowRight, BsBoxArrowLeft, BsBoundingBoxCircles, BsArrowRightShort, BsArrowLeftShort} from "react-icons/bs";
 
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/LanguageContext";
+import { PaginationContext } from "../context/PaginationContext";
 
 import { Tooltip } from "@material-tailwind/react";
 
@@ -26,6 +27,7 @@ import {
 
 import {BsToggleOff, BsToggleOn} from 'react-icons/bs'
 
+
 interface Genres {
   id: number;
   name: string;
@@ -40,6 +42,9 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const language = useContext(ThemeContext)
+  const {pagination, proximaPagina, voltarPagina} = useContext(PaginationContext)
+
+  console.log(pagination)
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -116,11 +121,14 @@ const Navbar = () => {
       </form>
     </nav>
 
+
+    
     <div className="fixed bottom-0 left-0 mx-auto h-12 mb-5 rounded-full w-full z-50">
         <div className="flex flex-row justify-center ">
-          <div className="bg-slate-600 flex flex-row pl-10 pr-10 rounded-full ml-2 mr-2">
-          <div className="p-1 ml-1 mr-1 text-4xl text-white"><Tooltip content="Página inicial" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 p-1 rounded-lg cursor-pointer"><BsFillHouseFill /></div></Tooltip></div>
-          <div className="p-1 ml-1 mr-1 text-4xl text-white">
+        <form onSubmit={handleSubmit}>
+          <div className="bg-slate-600 flex flex-row md:pl-5 md:pr-5 pl-2 pr-2 rounded-2xl ml-2 mr-2">
+          <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white"><Link to="/" className="flex" onClick={paginaInicial}><Tooltip content="Página inicial" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 p-1 rounded-lg cursor-pointer"><BsFillHouseFill /></div></Tooltip></Link></div>
+          <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white">
 
           <Tooltip content={language.theme} className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50">
 
@@ -130,9 +138,9 @@ const Navbar = () => {
       
 
           </div>
-          <div className="p-1 ml-1 mr-1 text-4xl text-white">
+          <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white">
           <Tooltip content='Gêneros' className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50">
-          <div className="transition hover:bg-slate-500 p-1 rounded-lg cursor-pointer">
+          <div className="transition hover:bg-slate-500 pt-1 pl-1 pr-1 rounded-lg cursor-pointer">
           <Menu>
       <MenuHandler>
         <Button variant="gradient"><BsCardList /></Button>
@@ -153,7 +161,7 @@ const Navbar = () => {
             </div>
             </Tooltip>
             </div>
-          <div className="pl-2 pt-2 pb-2 ml-1 md:inline hidden" ><input
+          <div className="pl-2 pt-2 pb-2 md:ml-1 md:inline hidden" ><input
           className=" pt-2.5 rounded-l-xl placeholder:-translate-y-1 pl-2 pr-2 w-full"
           type="text"
           placeholder={language.theme === "pt-BR" ? ("Pesquisar") : ("Search")}
@@ -162,16 +170,65 @@ const Navbar = () => {
         />
         
         </div>
-        <div className="pr-2 pt-2 pb-2 md:inline hidden"><button
+        <div className="pr-2 pt-2 pb-2 md:mr-1 md:inline hidden border-r-2"><button
           className="bg-slate-400 h-9 rounded-r-xl text-2xl pl-1 pr-1 text-white"
           type="submit"
         >
           <BiSearchAlt2 />
-        </button></div>
-        <div className="p-2 ml-1 mr-1 text-4xl text-white"><BiSearchAlt2 /></div>
-        <div className="p-1 ml-1 mr-1 text-4xl text-white"><a href="#topo"><div className="transition hover:bg-slate-500 p-1 rounded-lg"><BiUpArrowCircle /></div></a></div>
-          </div>
+        </button>
         </div>
+
+
+        <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white inline md:hidden border-r-2">
+          <Tooltip content='Gêneros' className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50">
+          <div className="transition hover:bg-slate-500 pt-1 pl-1 pr-1 rounded-lg cursor-pointer">
+
+
+    <Fragment>
+      <Popover placement="top">
+          <PopoverHandler>
+            <Button variant="gradient"><BiSearchAlt2 /></Button>
+          </PopoverHandler>
+          <PopoverContent className="rounded-xl z-50 w-11/12 flex flex-row justify-center -mt-1">
+          <div>
+                  <input
+          className="bg-slate-200 h-9 rounded-l-xl placeholder:pl-2 placeholder:pr-2"
+          type="text"
+          placeholder={language.theme === "pt-BR" ? ("Pesquisar") : ("Search")}
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        /></div>
+        <div>
+        <button
+        className="bg-slate-400 h-9 rounded-r-xl text-2xl text-white pl-2 pr-2"
+        type="submit"
+      >
+        <BiSearchAlt2 />
+      </button></div>
+          </PopoverContent>
+        </Popover>
+      </Fragment>
+            
+            </div>
+            </Tooltip>
+            </div>
+        
+        {pagination <= 1 ? (
+              <></>
+            ) : (<div className="p-1 md:ml-1 md:mr-1 text-4xl text-white"><Tooltip content="Voltar página" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 p-1 rounded-lg" onClick={voltarPagina}><BsArrowLeftShort /></div></Tooltip></div>
+            )}
+        <div className="p-0 text-4xl text-white"><Tooltip content="Página atual" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 mt-1 pb-1 pl-1 pr-1 rounded-lg">{pagination}</div></Tooltip></div>
+        <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white"><Tooltip content="Próxima página" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 p-1 rounded-lg" onClick={proximaPagina}><BsArrowRightShort /></div></Tooltip></div>
+        <div className="p-1 md:ml-1 md:mr-1 text-4xl text-white border-l-2"><a href="#topo"><Tooltip content="Ir para o topo" className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"><div className="transition hover:bg-slate-500 p-1 rounded-lg"><BiUpArrowCircle /></div></Tooltip></a></div>
+        
+        
+          </div>
+          </form>
+        </div>
+        
+
+        
+
     </div>
     </>
   );

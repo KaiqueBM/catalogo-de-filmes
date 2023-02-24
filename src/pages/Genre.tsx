@@ -2,6 +2,7 @@ import { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { ThemeContext } from "../context/LanguageContext";
+import { PaginationContext } from "../context/PaginationContext";
 
 const moviesURL = "https://api.themoviedb.org/3/movie/";
 const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
@@ -15,6 +16,7 @@ const Genre = () => {
   const [movies, setMovies] = useState<any>([]);
 
   const language = useContext(ThemeContext)
+  const {pagination, proximaPagina, voltarPagina} = useContext(PaginationContext)
 
   const getMovies = async (url: string) => {
     const res = await fetch(url);
@@ -29,17 +31,6 @@ const Genre = () => {
     setData(movie);
     console.log(data);
   };
-
-  const [pagination, setPagination] = useState<any>(1);
-
-  function proximaPagina(e: any) {
-    setPagination((prev: number) => prev + 1);
-    console.log(pagination);
-  }
-  function voltarPagina(e: any) {
-    setPagination((prev: number) => prev - 1);
-    console.log(pagination);
-  }
 
   useEffect(() => {
     const updateUrl = `${apiGenre}${apiKey}&language=${language.theme}&with_genres=${id}&page=${pagination}`;

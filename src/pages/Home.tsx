@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import MovieHeader from "../components/MovieHeader";
 import { ThemeContext } from "../context/LanguageContext";
+import { PaginationContext } from "../context/PaginationContext";
 
 
 const moviesURL = "https://api.themoviedb.org/3/movie/";
@@ -32,6 +33,7 @@ const Home = () => {
   const [genreList, setGenreList] = useState<any>([]);
 
   const language = useContext(ThemeContext)
+  const {pagination, proximaPagina, voltarPagina} = useContext(PaginationContext)
 
   const getMoviesList = async (url: string) => {
     const res = await fetch(url);
@@ -47,16 +49,7 @@ const Home = () => {
 
   const data = null
 
-  const [pagination, setPagination] = useState<number>(1);
-  function proximaPagina() {
-    setPagination((prev: number) => prev + 1);
-  }
-  function voltarPagina() {
-    setPagination((prev: number) => prev - 1);
-  }
-  function primeiraPagina(number: number) {
-    setPagination(number);
-  }
+
 
   useEffect(() => {
     const updateUrl = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
@@ -88,27 +81,7 @@ const Home = () => {
 
   return (
     <div className="">
-  
 
-      <div className=" bg-zinc-200">
-        <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-zinc-800">
-          <span className="md:border-b-4 md:border-t-4 border-slate-700">
-            
-            {language.theme === "pt-BR" ? (<span>GENEROS</span>) : (<span>GENRES</span>)}
-          </span>
-        </div>
-        <div className="flex flex-row flex-wrap justify-center mt-5 pb-5">
-          {genreList.map(({ id, name }: Genres) => (
-            <div key={id} className="md:text-2xl text-xl text-black ml-1 mr-1">
-              <Link to={`/genre/${name}/${id}`}>
-                <button className="bg-slate-200 pl-4 pr-4 rounded-xl border-2 border-slate-300 mt-1 mb-1 transition hover:bg-white hover:border-slate-200">
-                  {name}
-                </button>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
 
      
 

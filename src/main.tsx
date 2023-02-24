@@ -14,6 +14,7 @@ import Movie from './pages/Movie'
 import Home from './pages/Home'
 import Genre from './pages/Genre'
 import { ThemeProvider } from './context/LanguageContext'
+import { PaginationProvider } from './context/PaginationContext'
 
 
 
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider>
+      <PaginationProvider>
         <Routes>
           <Route element={<App />}>
             <Route path="/" element={<Home />} />
@@ -31,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Route path="search" element={<Search />} />
           </Route>
         </Routes>
+        </PaginationProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
