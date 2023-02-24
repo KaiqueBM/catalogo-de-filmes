@@ -1,7 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-import MovieHeader from "../components/MovieHeader";
 import { ThemeContext } from "../context/LanguageContext";
 import { PaginationContext } from "../context/PaginationContext";
 
