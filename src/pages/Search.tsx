@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import Footer from "../components/Footer";
 import MovieCard from "../components/MovieCard";
 import { ThemeContext } from "../context/LanguageContext";
 
@@ -53,6 +54,8 @@ const Search = () => {
       {movies.length === 0 ? (
           <p>Carregando...</p>
         ) : (<MovieCard movies={movies} />)}
+
+      <Footer />
     </div>
   );
 };

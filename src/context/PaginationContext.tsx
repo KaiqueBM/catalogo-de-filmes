@@ -8,14 +8,16 @@ export const PaginationProvider = ({children}:any)=>{
 
     const proximaPagina = () => {
         setPagination((prev: number) => prev + 1);
-        console.log(pagination)
     }
     const voltarPagina = () => {
         setPagination((prev: number) => prev - 1);
-        console.log(pagination)
+    }
+
+    const primeiraPagina = () => {
+        setPagination(1)
     }
 
     return (
-    <PaginationContext.Provider value={{pagination, proximaPagina, voltarPagina}}>{children}</PaginationContext.Provider>
+    <PaginationContext.Provider value={{pagination, proximaPagina, voltarPagina, primeiraPagina}}>{children}</PaginationContext.Provider>
     )
 }

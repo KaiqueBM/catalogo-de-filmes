@@ -49,7 +49,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const language = useContext(ThemeContext);
-  const { pagination, proximaPagina, voltarPagina } =
+  const { pagination, proximaPagina, voltarPagina, primeiraPagina } =
     useContext(PaginationContext);
 
   console.log(pagination);
@@ -62,11 +62,8 @@ const Navbar = () => {
     setSearch("");
   };
 
-  function paginaInicial() {
-    primeiraPagina(1);
-  }
-
   const [genreList, setGenreList] = useState<any>([]);
+  const [genreUpdate, setGenreUpdate] = useState<any>(0);
 
   const getGenreList = async (url: string) => {
     const res = await fetch(url);
@@ -81,6 +78,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    const updateGenreURL =
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
+    getGenreList(updateGenreURL);
+  }, [genreUpdate]);
+
+  useEffect(() => {
     const updateGenreURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=${language.theme}`;
     getGenreList(updateGenreURL);
   }, [language.theme]);
@@ -93,7 +96,7 @@ const Navbar = () => {
           
             <div className="bg-slate-600 flex flex-row md:pl-5 md:pr-5 pl-2 pr-2 sm:rounded-2xl justify-center sm:w-max w-full sm:p-1 p-2 sm:gap-1 gap-2 sm:border-0 border-t-2">
               <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white">
-                <Link to="/" className="flex" onClick={paginaInicial}>
+                <Link to="/" className="flex" onClick={primeiraPagina}>
                   <Tooltip
                     content="Página inicial"
                     className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
@@ -285,7 +288,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-function primeiraPagina(arg0: number) {
-  throw new Error("Function not implemented.");
-}

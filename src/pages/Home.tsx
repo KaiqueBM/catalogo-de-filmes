@@ -1,5 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import MovieCard from "../components/MovieCard";
 import { ThemeContext } from "../context/LanguageContext";
 import { PaginationContext } from "../context/PaginationContext";
@@ -48,8 +49,6 @@ const Home = () => {
 
   const data = null
 
-
-
   useEffect(() => {
     const updateUrl = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
     getMoviesList(updateUrl);
@@ -77,45 +76,14 @@ const Home = () => {
 
 
 
-
   return (
-    <div className="">
-
-
-     
-
+    <>
       {movies.length === 0 ? (
           <p>Carregando...</p>
         ) : (<MovieCard movies={movies} />)}
-            
 
-      <div className="w-full text-white bg-white border-t-4 border-slate-800">
-        <div className="flex flex-row justify-center">
-          <Link to="/" className="flex">
-            {pagination <= 1 ? (
-              <></>
-            ) : (
-              <button
-                className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
-                onClick={voltarPagina}
-              >
-                {language.theme === "pt-BR" ? (<span>Voltar página</span>) : (<span>Previous page</span>)}
-              </button>
-            )}
-            <button className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 bg-white text-slate-700 border-slate-700 m-2">
-              {pagination}
-            </button>
-
-            <button
-              className="text-2xl border-4 rounded-full pl-3 pr-3 pt-1 pb-1 uppercase bg-slate-300 text-slate-700 border-slate-700 m-2 transition hover:bg-white"
-              onClick={proximaPagina}
-            >
-              {language.theme === "pt-BR" ? (<span>Próxima página</span>) : (<span>Next page</span>)}
-            </button>
-          </Link>
-        </div>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
