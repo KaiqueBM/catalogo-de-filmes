@@ -38,10 +38,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <p align="center">
   <img src="./assets/app_3.png" width="500px">
 </p>
-
-<p align="center">
-  <img src="./assets/app_4.png" width="500px">
-</p>
 ---
 
 ## 🛠 COMO EXECUTAR
