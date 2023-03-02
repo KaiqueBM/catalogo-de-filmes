@@ -139,11 +139,11 @@ const Navbar = () => {
                           <BsCardList />
                         </Button>
                       </MenuHandler>
-                      <MenuList className="z-10 rounded-lg grid grid-cols-2 -mt-2 text-center">
+                      <MenuList className="z-10 rounded-lg grid grid-cols-2 -mt-3 text-center">
                         {genreList.map(({ id, name }: Genres) => (
-                          <div key={id} className=" text-black ml-1 mr-1">
+                          <div key={id} className=" text-black ml-1 mr-1 mt-0.5 mb-0.5">
                             <Link to={`/genre/${name}/${id}`}>
-                              <button className="bg-slate-100 w-full m-0.5">
+                              <button className="bg-slate-200 w-full m-0.5 transition duration-300 hover:bg-slate-300 rounded-lg hover:font-semibold">
                                 <MenuItem className="">{name}</MenuItem>
                               </button>
                             </Link>

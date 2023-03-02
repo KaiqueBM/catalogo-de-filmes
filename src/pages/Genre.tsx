@@ -57,9 +57,9 @@ const Genre = () => {
     <div className="">
       
 
-      <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
-        <span className="md:border-b-4 md:border-t-4 border-slate-700">
-          {language.theme === "pt-BR" ? (<span>Filmes do genero: {name}</span>) : (<span>Genre movies: {name}</span>)}
+      <div className="text-center text-2xl font-extrabold text-zinc-800 uppercase p-5 bg-white mb-10 ">
+        <span className="">
+          {language.theme === "pt-BR" ? (<span>Filmes do genero: <span className="border-b-2 border-zinc-800">{name}</span></span>) : (<span>Genre movies: <span className="border-b-2 border-zinc-800">{name}</span></span>)}
         </span>
       </div>
 

@@ -46,9 +46,9 @@ const Search = () => {
     <div className="">
       
 
-      <div className="text-center text-4xl font-bold text-zinc-800 uppercase p-5 bg-white border-b-4 mb-10 border-zinc-800">
-        <span className="md:border-b-4 md:border-t-4 border-slate-700">
-          {language.theme === "pt-BR" ? (<span>Resultados da busca por: {query}</span>) : (<span>Search results for: {query}</span>)}
+      <div className="text-center text-2xl font-bold text-zinc-800 uppercase p-5 bg-white mb-10">
+        <span className="">
+          {language.theme === "pt-BR" ? (<span>Resultados da busca por: <span className="border-b-2 border-zinc-800">{query}</span></span>) : (<span>Search results for: <span className="border-b-2 border-zinc-800">{query}</span></span>)}
         </span>
       </div>
       {movies.length === 0 ? (

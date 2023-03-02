@@ -30,7 +30,7 @@ const MovieCard = ({ movies }: any) => {
     <>
       <div className="relative flex md:flex-row flex-col justify-center md:h-530">
         <img
-          className="absolute w-full object-cover opacity-10 md:h-530 h-full transition"
+          className="absolute w-full object-cover opacity-10 md:h-530 h-full transition duration-500"
           src={
             !data
               ? imageUrlFull + movies[0].backdrop_path
@@ -38,7 +38,7 @@ const MovieCard = ({ movies }: any) => {
           }
         />
         <img
-          className="md:ml-4 md:mr-4 rounded-2xl mt-5 md:mb-5 opacity-100 z-10 hover:scale-105 transition md:w-min w-6/12 mx-auto"
+          className="md:ml-4 md:mr-4 rounded-2xl mt-5 md:mb-5 opacity-100 z-10 hover:scale-105 transition md:w-min w-6/12 mx-auto duration-500"
           src={
             !data
               ? imageUrlFull + movies[0].poster_path
@@ -93,7 +93,7 @@ const MovieCard = ({ movies }: any) => {
           movies.map((movie: Movies) => (
             <div
               key={movie.id}
-              className="hover:transform hover:scale-105 transition lg:w-3/12 sm:w-2/6 w-6/12 p-4"
+              className="hover:transform transition duration-500 lg:w-3/12 sm:w-2/6 w-6/12 p-4 hover:-translate-y-6"
               onMouseEnter={() => {
                 childToParent(movie);
               }}
