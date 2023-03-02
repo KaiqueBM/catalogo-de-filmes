@@ -183,52 +183,52 @@ const Movie = () => {
                 ))}
               </div>
 
-              <div className="text-white lg:text-6xl text-4xl text-center z-10 mb-3">
+              <div className="text-white lg:text-6xl text-4xl text-center z-10 mb-3 font-bold">
                 {movie.title}
               </div>
               <hr className="border-2 z-10 mb-3"></hr>
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsCameraReels /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Descrição:</span>) : (<span>Description:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {movie.overview}
               </div>
 
               <hr className="border-2 z-10 mb-3"></hr>
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsHourglassSplit />{" "}
                 <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Duração:</span>) : (<span>Duration:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {movie.runtime} minutos.
               </div>
 
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsWallet2 /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Orçamento:</span>) : (<span>Budget:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {formatCurrency(movie.budget)}
               </div>
 
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsGraphUp /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Receita:</span>) : (<span>Revenue:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {formatCurrency(movie.revenue)}
               </div>
 
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsCalendar3 />{" "}
                 <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Data de lançamento:</span>) : (<span>Release date of:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {movie.release_date}
               </div>
 
-              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase">
+              <div className="flex flex-row z-10 text-2xl text-gray-50 uppercase font-semibold">
                 <BsStar /> <span className="-mt-1 ml-2">{language.theme === "pt-BR" ? (<span>Nota:</span>) : (<span>Rate:</span>)}</span>
               </div>
-              <div className="text-gray-200 text-justify mb-3">
+              <div className="text-gray-200 text-justify mb-3 font-light">
                 {movie.vote_average}
               </div>
 
@@ -238,7 +238,7 @@ const Movie = () => {
                 to={`/`}
                 className="w-full flex flex-row justify-center z-10"
               >
-                <button className="border-2 border-white rounded-full lg:w-2/6 w-3/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition md:mb-0 mb-5">
+                <button className="border-2 border-white rounded-full lg:w-2/6 w-3/6 p-2 mt-3 text-gray-200 hover:bg-white hover:text-black transition md:mb-0 mb-20">
                   {language.theme === "pt-BR" ? (<span>VOLTAR PARA A HOME</span>) : (<span>BACK TO HOME</span>)}
                 </button>
               </Link>

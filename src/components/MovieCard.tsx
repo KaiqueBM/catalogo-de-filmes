@@ -84,7 +84,7 @@ const MovieCard = ({ movies }: any) => {
       <Bar />
 
       <div
-        className="flex flex-row flex-wrap justify-center w-full gap-4"
+        className="flex flex-row flex-wrap justify-center w-full"
         onMouseEnter={childToParent}
       >
         {movies.length === 0 ? (
@@ -93,7 +93,7 @@ const MovieCard = ({ movies }: any) => {
           movies.map((movie: Movies) => (
             <div
               key={movie.id}
-              className="hover:transform hover:scale-105 transition lg:w-1/6 sm:w-2/6 w-6/12"
+              className="hover:transform hover:scale-105 transition lg:w-3/12 sm:w-2/6 w-6/12 p-4"
               onMouseEnter={() => {
                 childToParent(movie);
               }}
