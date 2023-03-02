@@ -28,15 +28,15 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ## 🚀 Aplicação
 
 <p align="center">
-  <img src="./assets/app_1.png" width="500px">
+  <img src="./assets/app_1_new.png" width="500px">
 </p>
 
 <p align="center">
-  <img src="./assets/app_2.png" width="500px">
+  <img src="./assets/app_3_new.png" width="500px">
 </p>
 
 <p align="center">
-  <img src="./assets/app_3.png" width="500px">
+  <img src="./assets/app_2_new.png" width="500px">
 </p>
 ---
 
