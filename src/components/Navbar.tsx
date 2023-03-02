@@ -41,9 +41,6 @@ interface Genres {
 }
 [];
 
-const moviesURL = "https://api.themoviedb.org/3/movie/";
-const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
-
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -73,13 +70,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const genreURL =
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=${language.theme}`;
     getGenreList(genreURL);
   }, []);
 
   useEffect(() => {
     const updateGenreURL =
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=${language.theme}`;
     getGenreList(updateGenreURL);
   }, [genreUpdate]);
 
