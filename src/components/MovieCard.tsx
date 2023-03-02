@@ -46,11 +46,11 @@ const MovieCard = ({ movies }: any) => {
           }
         />
         <div className="md:w-5/12 ml-4 mr-4 mt-5 text-white flex flex-col justify-center text-center transition">
-          <div className="uppercase font-semibold text-4xl p-4 z-10">
+          <div className="uppercase font-bold sm:text-5xl text-4xl p-4 z-10">
             {!data ? movies[0].title : data.title}
           </div>
           <hr className="ml-4 mr-4 z-10"></hr>
-          <div className="p-4">
+          <div className="p-4 font-light">
             {!data ? movies[0].overview : data.overview}
           </div>
           <div className="z-10">
@@ -84,7 +84,7 @@ const MovieCard = ({ movies }: any) => {
       <Bar />
 
       <div
-        className="flex flex-row flex-wrap justify-center w-full"
+        className="flex flex-row flex-wrap justify-center w-full gap-4"
         onMouseEnter={childToParent}
       >
         {movies.length === 0 ? (
@@ -93,7 +93,7 @@ const MovieCard = ({ movies }: any) => {
           movies.map((movie: Movies) => (
             <div
               key={movie.id}
-              className="ml-5 mr-5 hover:transform hover:scale-105 transition whitespace-nowrap md:w-2/12 w-6/12"
+              className="hover:transform hover:scale-105 transition lg:w-1/6 sm:w-2/6 w-6/12"
               onMouseEnter={() => {
                 childToParent(movie);
               }}
@@ -104,7 +104,7 @@ const MovieCard = ({ movies }: any) => {
                   src={imageUrl + movie.poster_path}
                   alt={movie.title}
                 />
-                <p className="text-center text-white font-semibold pt-2 pb-5 text-xl whitespace-pre-line">
+                <p className="text-center  text-white font-semibold pt-2 pb-5 text-xl whitespace-pre-line">
                   {movie.title}
                 </p>
               </a>
