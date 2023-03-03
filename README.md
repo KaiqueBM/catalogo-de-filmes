@@ -48,7 +48,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 $ git clone git@github.com:KaiqueBM/catalogo-de-filmes.git
 
 # Vá para a pasta do projeto
-$ cd fortnite
+$ cd filmes
 
 # Instale as dependências
 $ npm install
