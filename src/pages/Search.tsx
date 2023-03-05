@@ -14,12 +14,12 @@ const Search = () => {
   const [movies, setMovies] = useState<any>([]);
   const query = searchParams.get("q");
 
-  const language = useContext(ThemeContext)
+  const language = useContext(ThemeContext);
 
   const getSearchMovies = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data)
+    console.log(data);
 
     setMovies(data.results);
   };
@@ -35,25 +35,35 @@ const Search = () => {
     getSearchMovies(searchWithQueryURL);
   }, [query]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const updateUrlTheme = `${searchURL}?${apiKey}&language=${language.theme}&query=${query}`;
     getSearchMovies(updateUrlTheme);
   }, [language.theme]);
 
-  console.log(movies)
+  console.log(movies);
 
   return (
     <div className="">
-      
-
       <div className="text-center text-2xl font-bold text-zinc-800 uppercase p-5 bg-white mb-10">
         <span className="">
-          {language.theme === "pt-BR" ? (<span>Resultados da busca por: <span className="border-b-2 border-zinc-800">{query}</span></span>) : (<span>Search results for: <span className="border-b-2 border-zinc-800">{query}</span></span>)}
+          {language.theme === "pt-BR" ? (
+            <span>
+              Resultados da busca por:{" "}
+              <span className="border-b-2 border-zinc-800">{query}</span>
+            </span>
+          ) : (
+            <span>
+              Search results for:{" "}
+              <span className="border-b-2 border-zinc-800">{query}</span>
+            </span>
+          )}
         </span>
       </div>
       {movies.length === 0 ? (
-          <p>Carregando...</p>
-        ) : (<MovieCard movies={movies} />)}
+        <p>Carregando...</p>
+      ) : (
+        <MovieCard movies={movies} />
+      )}
 
       <Footer />
     </div>

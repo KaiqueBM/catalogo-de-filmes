@@ -16,8 +16,9 @@ const Genre = () => {
   const { name } = useParams();
   const [movies, setMovies] = useState<any>([]);
 
-  const language = useContext(ThemeContext)
-  const {pagination, proximaPagina, voltarPagina, primeiraPagina} = useContext(PaginationContext)
+  const language = useContext(ThemeContext);
+  const { pagination, proximaPagina, voltarPagina, primeiraPagina } =
+    useContext(PaginationContext);
 
   const getMovies = async (url: string) => {
     const res = await fetch(url);
@@ -41,31 +42,41 @@ const Genre = () => {
   useEffect(() => {
     const moviesUrl = `${apiGenre}${apiKey}&language=${language.theme}&with_genres=${id}`;
     getMovies(moviesUrl);
-    primeiraPagina()
+    primeiraPagina();
   }, [id]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [pagination]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const updateUrlTheme = `${apiGenre}${apiKey}&language=${language.theme}&with_genres=${id}&page=${pagination}`;
     getMovies(updateUrlTheme);
   }, [language.theme]);
 
   return (
     <div className="">
-      
-
       <div className="text-center text-2xl font-extrabold text-zinc-800 uppercase p-5 bg-white mb-10 ">
         <span className="">
-          {language.theme === "pt-BR" ? (<span>Filmes do genero: <span className="border-b-2 border-zinc-800">{name}</span></span>) : (<span>Genre movies: <span className="border-b-2 border-zinc-800">{name}</span></span>)}
+          {language.theme === "pt-BR" ? (
+            <span>
+              Filmes do genero:{" "}
+              <span className="border-b-2 border-zinc-800">{name}</span>
+            </span>
+          ) : (
+            <span>
+              Genre movies:{" "}
+              <span className="border-b-2 border-zinc-800">{name}</span>
+            </span>
+          )}
         </span>
       </div>
 
       {movies.length === 0 ? (
-          <p>Carregando...</p>
-        ) : (<MovieCard movies={movies} />)}
+        <p>Carregando...</p>
+      ) : (
+        <MovieCard movies={movies} />
+      )}
 
       <Footer />
     </div>

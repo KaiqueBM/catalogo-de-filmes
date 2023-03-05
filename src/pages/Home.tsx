@@ -5,9 +5,9 @@ import MovieCard from "../components/MovieCard";
 import { ThemeContext } from "../context/LanguageContext";
 import { PaginationContext } from "../context/PaginationContext";
 
-
 const moviesURL = "https://api.themoviedb.org/3/movie/";
 const apiKey = "api_key=699f83f2ccaef388106eac2b4c22ea0f";
+const apiGenreURL = "https://api.themoviedb.org/3/genre/movie/list";
 const imageUrl = "https://image.tmdb.org/t/p/w1280/";
 const imageUrlFull = "https://image.tmdb.org/t/p/w1280/";
 
@@ -32,8 +32,9 @@ const Home = () => {
   const [movies, setMovies] = useState<any>([]);
   const [genreList, setGenreList] = useState<any>([]);
 
-  const language = useContext(ThemeContext)
-  const {pagination, proximaPagina, voltarPagina} = useContext(PaginationContext)
+  const language = useContext(ThemeContext);
+  const { pagination, proximaPagina, voltarPagina } =
+    useContext(PaginationContext);
 
   const getMoviesList = async (url: string) => {
     const res = await fetch(url);
@@ -47,7 +48,7 @@ const Home = () => {
     setGenreList(data.genres);
   };
 
-  const data = null
+  const data = null;
 
   useEffect(() => {
     const updateUrl = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
@@ -59,28 +60,26 @@ const Home = () => {
   }, [pagination]);
 
   useEffect(() => {
-    const apiMoviesURL = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=1`;
+    const apiMoviesURL = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
     getMoviesList(apiMoviesURL);
-    const genreURL =
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=pt-BR";
+    const genreURL = `${apiGenreURL}?${apiKey}&language=${language.theme}`;
     getGenreList(genreURL);
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const updateUrlTheme = `${moviesURL}popular?${apiKey}&language=${language.theme}&page=${pagination}`;
     getMoviesList(updateUrlTheme);
-    const updateGenreURL =
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=699f83f2ccaef388106eac2b4c22ea0f&language=${language.theme}`;
+    const updateGenreURL = `${apiGenreURL}?${apiKey}&language=${language.theme}`;
     getGenreList(updateGenreURL);
   }, [language.theme]);
-
-
 
   return (
     <>
       {movies.length === 0 ? (
-          <p>Carregando...</p>
-        ) : (<MovieCard movies={movies} />)}
+        <p>Carregando...</p>
+      ) : (
+        <MovieCard movies={movies} />
+      )}
 
       <Footer />
     </>
