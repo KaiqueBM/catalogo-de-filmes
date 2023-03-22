@@ -28,7 +28,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ## 🚀 Aplicação
 
 <p align="center">
-  <img src="./assets/app_1_new.png" width="500px">
+  <img src="./assets/app_1_new_.png" width="500px">
 </p>
 
 <p align="center">
@@ -36,7 +36,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 </p>
 
 <p align="center">
-  <img src="./assets/app_2_new.png" width="500px">
+  <img src="./assets/app_2_new_.png" width="500px">
 </p>
 ---
 
