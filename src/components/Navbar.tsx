@@ -268,7 +268,9 @@ const Navbar = () => {
             <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white border-l-2">
               <a href="#topo">
                 <Tooltip
-                  content="Ir para o topo"
+                  content={
+                    language.theme === "pt-BR" ? "Ir para o topo" : "Go to top"
+                  }
                   className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
                 >
                   <div className="transition hover:bg-slate-500 p-1 rounded-lg">
