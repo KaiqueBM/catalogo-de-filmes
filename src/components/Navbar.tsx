@@ -89,7 +89,9 @@ const Navbar = () => {
             <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white">
               <Link to="/" className="flex" onClick={primeiraPagina}>
                 <Tooltip
-                  content="Página inicial"
+                  content={
+                    language.theme === "pt-BR" ? "Página inicial" : "Home"
+                  }
                   className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
                 >
                   <div className="transition hover:bg-slate-500 p-1 rounded-lg cursor-pointer">
@@ -123,7 +125,9 @@ const Navbar = () => {
             </div>
             <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white">
               <Tooltip
-                content="Gêneros"
+                content={
+                  language.theme === "pt-BR" ? "Gêneros" : "Genres"
+                }
                 className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
               >
                 <div className="transition hover:bg-slate-500 pt-1 pl-1 pr-1 rounded-lg cursor-pointer">
