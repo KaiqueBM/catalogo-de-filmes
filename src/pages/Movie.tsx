@@ -45,15 +45,24 @@ const Movie = () => {
   };
 
   useEffect(() => {
-    const movieUrl = `${moviesURL}${id}?${apiKey}&language=pt-BR`;
+    const movieUrl = `${moviesURL}${id}?${apiKey}&language=${language.theme}`;
     getMovie(movieUrl);
   }, []);
+
+  useEffect(() => {
+    const movieUrl = `${moviesURL}${id}?${apiKey}&language=${language.theme}`;
+    getMovie(movieUrl);
+  }, [language.theme]);
+
+
 
   interface genres {
     id: number;
     name: string;
   }
   [];
+
+
 
   return (
     <div className="bg-zinc-800 lg:h-screen h-full">
