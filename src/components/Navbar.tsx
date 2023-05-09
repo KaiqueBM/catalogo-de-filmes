@@ -224,7 +224,9 @@ const Navbar = () => {
             ) : (
               <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white">
                 <Tooltip
-                  content="Voltar página"
+                  content={
+                    language.theme === "pt-BR" ? "Voltar página" : "Previos page"
+                  }
                   className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
                 >
                   <div
@@ -238,7 +240,9 @@ const Navbar = () => {
             )}
             <div className="p-0 sm:text-4xl text-3xl text-white">
               <Tooltip
-                content="Página atual"
+                content={
+                  language.theme === "pt-BR" ? "Página atual" : "Current page"
+                }
                 className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
               >
                 <div className="transition hover:bg-slate-500 mt-1 pb-1 pl-1 pr-1 rounded-lg">
@@ -248,7 +252,9 @@ const Navbar = () => {
             </div>
             <div className="sm:p-1 pt-1 md:ml-1 md:mr-1 sm:text-4xl text-3xl text-white">
               <Tooltip
-                content="Próxima página"
+                content={
+                  language.theme === "pt-BR" ? "Próxima página" : "Next page"
+                }
                 className="bg-white -mt-1 pl-3 pr-3 text-black rounded-full z-50"
               >
                 <div
